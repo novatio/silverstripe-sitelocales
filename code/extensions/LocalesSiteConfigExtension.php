@@ -11,7 +11,7 @@ class LocalesSiteConfigExtension extends DataExtension
             "Root.Locales",
             ListboxField::create(
                 'SiteLocales',
-                $this->fieldLabels('SiteLocales'),
+                $this->owner->fieldLabel('SiteLocales'),
                 i18n::get_common_locales()
             )
                 ->setMultiple(true)
@@ -45,15 +45,7 @@ class LocalesSiteConfigExtension extends DataExtension
         }
     }
 
-    /**
-     *
-     * @param boolean $includerelations a boolean value to indicate if the labels returned include relation fields
-     *
-     */
-    public function fieldLabels($includerelations = true) {
-        $labels = parent::fieldLabels($includerelations);
+    public function updateFieldLabels(&$labels) {
         $labels['SiteLocales'] = _t('SiteLocales.SiteLocalesField', 'Allowed Site Locales');
-
-        return $labels;
     }
 }
