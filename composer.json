@@ -1,0 +1,34 @@
+{
+  "name": "novatio/silverstripe-sitelocales",
+  "description": "SiteConfig add-on to manage allowed locales from the CMS",
+  "homepage": "https://novat.io",
+  "license": "BSD-3-Clause",
+  "type": "silverstripe-module",
+  "keywords": ["silverstripe", "siteconfig", "locale"],
+  "authors": [
+    {
+      "name": "Gabrijel Gavranović",
+      "email": "gabrijel@gavro.nl"
+    }
+  ],
+  "require":
+  {
+    "silverstripe/framework": "~3.4",
+    "silverstripe/cms": "~3.4",
+    "silverstripe/siteconfig": "~3.4",
+    "silverstripe/translatable": "2.*",
+    "symfony/yaml": "~2.0"
+  },
+  "suggest": {
+    "bummzack/translatable-dataobject": "Silverstripe Translatable extension for DataObjects"
+  },
+  "extra": {
+    "installer-name": "sitelocales"
+  },
+  "support":
+  {
+    "email": "info@novat.io",
+    "issues": "https://github.com/novatio/silverstripe-sitelocales/issues"
+  },
+  "minimum-stability": "dev"
+}

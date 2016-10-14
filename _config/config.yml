@@ -1,0 +1,9 @@
+---
+name: 'sitelocales'
+After:
+  - 'mysite/*'
+---
+
+SiteConfig:
+  extensions:
+    - LocalesSiteConfigExtension
