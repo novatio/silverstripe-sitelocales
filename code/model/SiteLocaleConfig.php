@@ -55,9 +55,10 @@ class SiteLocaleConfig
 
             if (class_exists('TranslatableDataObject')) {
                 // remove default locale for TranslatableDataObject; need to keep the CMS working nicely.
-                if ($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) {
+                while (($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) !== false) {
                     unset($locales[$key]);
                 }
+
                 TranslatableDataObject::set_locales(array_values($locales));
             }
         }
@@ -84,7 +85,7 @@ class SiteLocaleConfig
             /*
              * Remove "default locale" from this list. Prevents double fields for the default locale @ CMS fields.
              */
-            if ($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) {
+            while (($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) !== false) {
                 unset($locales[$key]);
             }
 
