@@ -51,14 +51,14 @@ class SiteLocaleConfig
     public function initiateAllowedSiteLocales()
     {
         if ($locales = $this->getAllowedLocales()) {
+            // remove default locale; need to keep the CMS working nicely.
+            while (($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) !== false) {
+                unset($locales[$key]);
+            }
+
             Translatable::set_allowed_locales($locales);
 
             if (class_exists('TranslatableDataObject')) {
-                // remove default locale for TranslatableDataObject; need to keep the CMS working nicely.
-                while (($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) !== false) {
-                    unset($locales[$key]);
-                }
-
                 TranslatableDataObject::set_locales(array_values($locales));
             }
         }
@@ -74,7 +74,13 @@ class SiteLocaleConfig
         );
 
         if ($config && is_object($config) && isset($config->sitelocales)) {
-            $config->sitelocales[] = Config::inst()->get('i18n', 'default_locale');
+            /*
+             * Make sure the default locale is added.
+             */
+            if (!in_array(Config::inst()->get('i18n', 'default_locale'), $config->sitelocales)) {
+                $config->sitelocales[] = Config::inst()->get('i18n', 'default_locale');
+            }
+
             return $config->sitelocales;
         }
     }
@@ -83,10 +89,10 @@ class SiteLocaleConfig
     {
         if (is_array($locales) && count($locales)) {
             /*
-             * Remove "default locale" from this list. Prevents double fields for the default locale @ CMS fields.
+             * Make sure the default locale is added.
              */
-            while (($key = array_search(Config::inst()->get('i18n', 'default_locale'), $locales)) !== false) {
-                unset($locales[$key]);
+            if (!in_array(Config::inst()->get('i18n', 'default_locale'), $locales)) {
+                $locales[] = Config::inst()->get('i18n', 'default_locale');
             }
 
             $this->writeConfigFile($this->file, Yaml::dump([ 'sitelocales' => array_values($locales) ], 2, 2));
