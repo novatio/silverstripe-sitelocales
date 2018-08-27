@@ -17,7 +17,7 @@
     "silverstripe/cms": "~3.4",
     "silverstripe/siteconfig": "~3.4",
     "silverstripe/translatable": "2.*",
-    "symfony/yaml": "~2.0"
+    "symfony/yaml": ">=2.0"
   },
   "suggest": {
     "bummzack/translatable-dataobject": "Silverstripe Translatable extension for DataObjects"
